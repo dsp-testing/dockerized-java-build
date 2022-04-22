@@ -1,0 +1,28 @@
+name: "CodeQL"
+
+on:
+  push:
+    branches:
+      - master
+jobs:
+  analyze:
+    name: Analyze
+    runs-on: ubuntu-latest
+
+    container:
+      image: maven:3.6.3-openjdk-14
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v2
+        with:
+          languages: java
+
+      - name: Autobuild
+        uses: github/codeql-action/autobuild@v2
+
+      - name: Analyze
+        uses: github/codeql-action/analyze@v2
